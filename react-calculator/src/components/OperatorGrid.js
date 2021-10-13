@@ -1,17 +1,28 @@
-import React from "react";
-import { OperatorGridDiv, OperatorButton } from "./styled_components";
+import React from 'react';
+import { OperatorGridDiv, OperatorButton } from './styled_components';
 
-const OperatorGrid = () => {
-    return(
+const OperatorGrid = ({
+  clearHandler,
+  handleOperator,
+  equalHandler,
+  backHandler,
+}) => {
+  const operators = ['+', '-', '*', '/', '%'];
+  return (
     <OperatorGridDiv>
-        <OperatorButton><p>+</p></OperatorButton>
-        <OperatorButton><p>-</p></OperatorButton>
-        <OperatorButton><p>x</p></OperatorButton>
-        <OperatorButton><p>/</p></OperatorButton>
-        <OperatorButton><p>%</p></OperatorButton>
-        <OperatorButton><p>=</p></OperatorButton>
-    </OperatorGridDiv>
-    );
-}
+      <OperatorButton onClick={clearHandler}>C</OperatorButton>
+      <OperatorButton onClick={backHandler}>&lt;</OperatorButton>
 
-export default OperatorGrid
+      {operators.map((op, idx) => {
+        return (
+          <OperatorButton key={idx} onClick={handleOperator}>
+            {op}
+          </OperatorButton>
+        );
+      })}
+      <OperatorButton onClick={equalHandler}>=</OperatorButton>
+    </OperatorGridDiv>
+  );
+};
+
+export default OperatorGrid;
